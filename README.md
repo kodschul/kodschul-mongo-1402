@@ -40,4 +40,4 @@ Dieses Repository bietet einen strukturierten Lernpfad für MongoDB. Die verschi
 
 ## Hinweis
 
-Es wird empfohlen, die Module in der oben genannten Reihenfolge zu durchlaufen, um ein solides Fundament in Python zu entwickeln. Jedes Modul enthält praktische Beispiele und Übungen, um das Gelernte zu festigen. Viel Spaß beim Lernen!
+Es wird empfohlen, die Module in der oben genannten Reihenfolge zu durchlaufen, um ein solides Fundament in MongoDB zu entwickeln. Jedes Modul enthält praktische Beispiele und Übungen, um das Gelernte zu festigen. Viel Spaß beim Lernen!
