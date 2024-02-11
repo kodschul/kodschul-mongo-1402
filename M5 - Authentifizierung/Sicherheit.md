@@ -18,5 +18,14 @@ Die Implementierung von Authentifizierung und Autorisierung ist grundlegend für
 
 2. **Erstellen von Benutzerkonten mit spezifischen Rollen**
    Verwenden Sie das MongoDB-Shell oder administrative Tools, um Benutzerkonten mit entsprechenden Rollen zu erstellen, die den Zugriff auf Datenbanken und Sammlungen steuern.
+     ```shell
+   use admin
+   db.createUser({
+     user: "meinBenutzer",
+     pwd: "meinPasswort",
+     roles: [{ role: "readWrite", db: "meineDatenbank" }]
+   })
+    ```
 
+##
   
