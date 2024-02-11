@@ -1,16 +1,18 @@
+# Abfragen von MongoDB
 
-## Grundlagen
+Abfragen ermöglicht das Suchen von Dokumenten in Sammlungen basierend auf spezifischen Kriterien und Bedingungen.
 
-### Verbindung herstellen
+## Beispiele
 
-Um eine Verbindung zu einer MongoDB-Datenbank herzustellen, verwenden Sie die MongoDB Client-Bibliothek für Ihre Programmiersprache. Hier ist ein Beispiel in Python mit `pymongo`:
+Hier ein paar Beispiele: 
 
-```python
-from pymongo import MongoClient
+'''Javascript 
+async function findDocuments(client, dbName, collectionName) {
+  const collection = client.db(dbName).collection(collectionName);
+  const documents = await collection.find({}).toArray();
+  console.log(documents);
+}
+'''
 
-# Verbindung zur MongoDB-Instanz herstellen
-client = MongoClient('mongodb://localhost:27017/')
 
-# Auswahl der Datenbank
-db = client['meineDatenbank']
 
