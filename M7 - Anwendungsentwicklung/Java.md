@@ -17,7 +17,7 @@ Die Entwicklung von Anwendungen mit MongoDB in Java wird durch den offiziellen M
 
 ## Beispiel 1: Aufbau einer Verbindung zu MongoDB
 
-  Um mit MongoDB zu interagieren, müssen Sie zunächst eine Verbindung zur Datenbank herstellen. Der MongoDB .NET Treiber verwendet die MongoClient-Klasse, um eine Verbindung zur Datenbank herzustellen.
+Um mit MongoDB zu interagieren, müssen Sie zunächst eine Verbindung zur Datenbank herstellen. Der MongoDB Java Driver verwendet die MongoClients-Klasse, um eine Verbindung zur Datenbank herzustellen.
   
  ### Codebeispiel:
   ```java
