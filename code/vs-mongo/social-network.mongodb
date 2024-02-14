@@ -1,0 +1,112 @@
+use("social-network");
+
+// users erstellt
+
+// db.createCollection("users");
+// db.users.insertMany([
+//   {
+//     username: "guru1",
+//     email: "guru@dev.com",
+//     friends: ["alice", "bob"],
+//   },
+//   {
+//     username: "mongo",
+//     email: "mongo@dev.com",
+//     friends: ["guru1", "bob"],
+//   },
+// ]);
+
+// users createdAt setzen
+// db.users.updateMany(
+//   {},
+//   {
+//     $set: { createdAt: new Date() },
+//   }
+// );
+
+// posts erstellt
+
+// db.createCollection("posts");
+
+// db.posts.insertMany([
+//   {
+//     content: "This is cool!",
+//     userId: ObjectId("65ccb03633bedabcbbf6090e"),
+//   },
+//   {
+//     content: "Yes it's cool!",
+//     userId: ObjectId("65ccb03633bedabcbbf6090f"),
+//   },
+// ]);
+
+// db.users.findOne({ _id: ObjectId("65ccb03633bedabcbbf6090e") });
+
+// db.users.updateOne(
+//   { _id: ObjectId("65ccb03633bedabcbbf6090e") },
+//   {
+//     $set: {
+//       email: "test@test.de",
+//     },
+//   }
+// );
+
+// Nutzer + Posts joinen/suchen
+
+// db.posts.find({});
+
+// Pipeline von Funktionen
+
+db.posts.aggregate([
+  // andere Kollektion durchsuchen
+  {
+    $lookup: {
+      from: "users",
+      localField: "userId",
+      foreignField: "_id",
+      as: "user",
+    },
+  },
+
+  // Filter
+  {
+    $match: {
+      "user.email": "mongo@dev.com",
+    },
+  },
+
+  // zusätzliches Feld erstellen
+  {
+    $addFields: {
+      creator: {
+        $first: "$user.username",
+      },
+    },
+  },
+
+  // Felder explizit auswählen
+
+  // in diesem wollen wir zu jedem Post nur den Content + Creator aussuchen
+  {
+    $project: {
+      content: 1,
+      creator: 1,
+      _id: 0,
+    },
+  },
+]);
+
+// db.posts.aggregate([
+//   {
+//     $group: {
+//       _id: "$userId",
+//       totalUsers: { $sum: 1 },
+//     },
+//   },
+
+//   {
+//     $group: {
+//       _id: null,
+//       newValue: { $avg: "$totalUsers" },
+//     },
+//   },
+// ]);

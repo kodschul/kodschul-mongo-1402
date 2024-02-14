@@ -1,0 +1,23 @@
+use("test");
+
+// db.createCollection("products");
+
+// db.getCollection("products");
+// db.products.insertOne({
+//   name: "Banana",
+//   price: 10,
+//   category: "Obst",
+//   views: 10,
+// });
+
+// db.products.insertMany([
+//   { name: "Lemonade", price: 10, category: "Obst", views: 10 },
+//   { name: "Cherry", price: 10, category: "Obst", views: 10 },
+// ]);
+
+db.products.find(
+  {
+    price: { $lte: 11 },
+  },
+  { name: true }
+);
