@@ -1,0 +1,38 @@
+use("social-network");
+
+db.users.insertOne({
+  username: "test123",
+  email: "test@test.de",
+  friends: ["alice", "bob"],
+  createdAt: new Date(),
+});
+
+db.users.updateOne(
+  {
+    username: "test123",
+  },
+  {
+    $set: {
+      email: "updated@acme.de",
+    },
+  }
+);
+
+db.users.replaceOne(
+  {
+    username: "test125",
+  },
+  {
+    username: "test125",
+    email: "test@test.de",
+    // friends: ["alice", "bob"],
+    // createdAt: new Date(),
+  },
+  {
+    upsert: true,
+  }
+);
+
+db.users.findOne({
+  username: "test125",
+});

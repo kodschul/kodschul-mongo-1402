@@ -95,18 +95,18 @@ db.posts.aggregate([
   },
 ]);
 
-// db.posts.aggregate([
-//   {
-//     $group: {
-//       _id: "$userId",
-//       totalUsers: { $sum: 1 },
-//     },
-//   },
+db.posts.aggregate([
+  {
+    $group: {
+      _id: "$userId",
+      totalUsers: { $sum: 1 },
+    },
+  },
 
-//   {
-//     $group: {
-//       _id: null,
-//       newValue: { $avg: "$totalUsers" },
-//     },
-//   },
-// ]);
+  {
+    $group: {
+      _id: null,
+      newValue: { $avg: "$totalUsers" },
+    },
+  },
+]);
