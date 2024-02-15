@@ -50,3 +50,16 @@ db.sales.find({
 db.sales.find({
   price: { $nin: [5, 10] },
 });
+
+// sort by price DESC
+
+db.sales.find().sort({
+  price: "asc",
+  date: "desc",
+});
+
+// // sort by date DESC
+
+// db.sales.find().sort({
+//   date: "desc",
+// });
