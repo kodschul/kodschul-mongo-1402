@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 // start connection
 
-mongoose.connect("mongodb://127.0.0.1:27017/tweets");
+mongoose.connect("mongodb://127.0.0.1:27017/jsmongo");
 
 const userSchema = new Schema({
   name: String,
@@ -14,9 +14,9 @@ const userSchema = new Schema({
 
 const User = mongoose.model("User", userSchema);
 
-(async () => {
+async function main() {
   const allUsers = await User.find({});
-  console.log(allUsers);
+  console.log(allUser);
 
   // create new user
   const alice = new User({ name: "Alice", age: 20, email: "alice@dot.com" });
@@ -26,4 +26,6 @@ const User = mongoose.model("User", userSchema);
 
   // disconnect
   mongoose.disconnect();
-})();
+}
+
+main();
