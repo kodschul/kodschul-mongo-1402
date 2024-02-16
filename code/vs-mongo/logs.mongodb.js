@@ -34,7 +34,7 @@ use("test");
 db.logs.aggregate([
   {
     $sort: {
-      time: -1,
+      time: "dasasas",
     },
   },
 

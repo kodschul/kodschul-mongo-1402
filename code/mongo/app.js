@@ -15,14 +15,25 @@ const userSchema = new Schema({
 const User = mongoose.model("User", userSchema);
 
 async function main() {
-  const allUsers = await User.find({});
-  console.log(allUser);
+  const aliceEmail = await User.findOne({
+    email: {
+      $regex: /^alice/i,
+    },
+  });
 
+  const alice = await User.findById("65ce25e2db9db147257d17e3");
+
+  alice.name = "Alice2";
+  await alice.save();
+
+  await alice.deleteOne();
+
+  console.log(`Hi ${alice.name}, you're ${alice.age} y/o!`);
   // create new user
-  const alice = new User({ name: "Alice", age: 20, email: "alice@dot.com" });
-  //   await alice.save();
+  // const alice = new User({ name: "Alice", age: 20, email: "alice@dot.com" });
+  // await alice.save();
 
-  console.log(alice);
+  // console.log(alice);
 
   // disconnect
   mongoose.disconnect();
