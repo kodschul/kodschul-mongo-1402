@@ -12,40 +12,62 @@ const productSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   variants: [{ size: String, color: String, stock: Number }],
   reviews: [{ author: String, rating: Number, comment: String }],
+  averageRating: { type: Number, optional: true },
 });
 
 const Product = mongoose.model("Product", productSchema);
 
 async function main() {
   // create many products
-  await Product.insertMany([
+  // await Product.insertMany([
+  //   {
+  //     name: "T-shirt",
+  //     category: "Clothing",
+  //     price: 19.99,
+  //     variants: [
+  //       { size: "S", color: "Blue", stock: 50 },
+  //       { size: "M", color: "Blue", stock: 30 },
+  //     ],
+  //     reviews: [
+  //       { author: "John Doe", rating: 4.5, comment: "Great quality!" },
+  //       { author: "Jane Smith", rating: 5, comment: "Love it!" },
+  //     ],
+  //   },
+  //   {
+  //     name: "Jeans",
+  //     category: "Clothing",
+  //     price: 39.99,
+  //     variants: [
+  //       { size: "30x32", color: "Blue", stock: 40 },
+  //       { size: "34x32", color: "Black", stock: 20 },
+  //     ],
+  //     reviews: [
+  //       { author: "Alice Johnson", rating: 4, comment: "Nice fit!" },
+  //       { author: "Bob Williams", rating: 4.5, comment: "Comfortable." },
+  //     ],
+  //   },
+  // ]);
+
+  const product = await Product.findOne({ name: "T-shirt" });
+
+  product.reviews.push({ author: "Alice1", rating: 5, comment: "Awesome!" });
+  await product.save();
+
+  // calculate the average rating
+
+  const res = await Product.findOne(
+    { _id: product._id },
     {
-      name: "T-shirt",
-      category: "Clothing",
-      price: 19.99,
-      variants: [
-        { size: "S", color: "Blue", stock: 50 },
-        { size: "M", color: "Blue", stock: 30 },
-      ],
-      reviews: [
-        { author: "John Doe", rating: 4.5, comment: "Great quality!" },
-        { author: "Jane Smith", rating: 5, comment: "Love it!" },
-      ],
-    },
-    {
-      name: "Jeans",
-      category: "Clothing",
-      price: 39.99,
-      variants: [
-        { size: "30x32", color: "Blue", stock: 40 },
-        { size: "34x32", color: "Black", stock: 20 },
-      ],
-      reviews: [
-        { author: "Alice Johnson", rating: 4, comment: "Nice fit!" },
-        { author: "Bob Williams", rating: 4.5, comment: "Comfortable." },
-      ],
-    },
-  ]);
+      averageRating: {
+        $avg: "$reviews.rating",
+      },
+    }
+  );
+
+  product.averageRating = res.averageRating;
+  await product.save();
+
+  // console.log(product);
 
   // disconnect
   mongoose.disconnect();
